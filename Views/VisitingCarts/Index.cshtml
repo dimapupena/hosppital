@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Hospital.VisitingCart>
+
+@{
+    ViewBag.Title = "Index";
+    var patients = ViewBag.patients;
+}
+
+<h2>Index</h2>
+
+@Html.BeginForm()
+{ 
+@Html.AntiForgeryToken();
+<form method="post">
+    <p>
+        <label for="patientName">choose some patients</label>
+        <select name="patientId">
+            <option selected hidden>Sort table</option>
+            <option value=-1>see all doctors</option>
+            @if (patients != null)
+            {
+                foreach (var patient in patients)
+                {
+                    <option value=@patient.Id>@patient.PatienName</option>
+                }
+            }
+        </select>
+    </p>
+
+    <p>
+        <input type="submit" value="Sort" />
+    </p>
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor.DoctopName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.PatienName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.DoctopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.PatienName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+}

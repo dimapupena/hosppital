@@ -1,0 +1,40 @@
+﻿@model Hospital.Scheduler
+
+@{
+    ViewBag.Title = "WriteResult";
+}
+
+<h2>WriteResult</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h2>VisitingCart</h2><br />
+    <h4> create resulf for @ViewBag.patientName</h4>
+    <hr />
+
+    <label name="resultText"> Please, write result</label>
+    <form method="post">
+        <input type="text" name="result" style="        
+        width: 800px;
+        height: 500px;
+        background: #cccccc;
+        margin-left: auto;
+        margin-right: auto;
+        vertical-align: top;
+" />
+    </form>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
